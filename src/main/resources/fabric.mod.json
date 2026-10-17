@@ -5,6 +5,7 @@
 	"name": "Myriad Boze",
 	"description": "Every Boze module in Myriad's menu: toggles, settings and keybinds, kept in sync with Boze. Needs Myriad and Boze.",
 	"authors": ["Myriad"],
+	"icon": "assets/myriad-boze/icon.png",
 	"license": "CC0-1.0",
 	"contact": {
 		"sources": "https://github.com/MyriadClient/myriad-boze",
