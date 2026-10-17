@@ -1,4 +1,4 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.BozeInstance;
 import dev.boze.api.addon.Addon;
@@ -6,11 +6,11 @@ import dev.boze.api.client.FriendManager;
 import dev.boze.api.client.ModuleManager;
 import dev.boze.api.client.module.BaseModule;
 import dev.boze.api.internal.Instances;
-import dev.myriad.api.Myriad;
-import dev.myriad.api.addon.AddonContext;
-import dev.myriad.api.module.Category;
-import dev.myriad.api.setting.SettingColor;
-import dev.myriad.api.util.MyriadId;
+import dev.myriadclient.api.Myriad;
+import dev.myriadclient.api.addon.AddonContext;
+import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.setting.SettingColor;
+import dev.myriadclient.api.util.MyriadId;
 
 import java.util.ArrayList;
 import java.util.HashMap;

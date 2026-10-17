@@ -1,12 +1,12 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
-import dev.myriad.api.addon.AddonContext;
-import dev.myriad.api.addon.MyriadAddon;
-import dev.myriad.api.event.events.TickEvent;
-import dev.myriad.api.module.Category;
-import dev.myriad.api.setting.SettingColor;
-import dev.myriad.api.ui.widget.HBox;
-import dev.myriad.api.ui.widget.Slider;
+import dev.myriadclient.api.addon.AddonContext;
+import dev.myriadclient.api.addon.MyriadAddon;
+import dev.myriadclient.api.event.events.TickEvent;
+import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.setting.SettingColor;
+import dev.myriadclient.api.ui.widget.HBox;
+import dev.myriadclient.api.ui.widget.Slider;
 
 /**
  * Puts every Boze module in Myriad's menu. Boze (<a href="https://boze.dev">boze.dev</a>) is a separate, closed

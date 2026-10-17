@@ -1,8 +1,8 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.client.module.BaseModule;
-import dev.myriad.api.module.Categories;
-import dev.myriad.api.module.Category;
+import dev.myriadclient.api.module.Categories;
+import dev.myriadclient.api.module.Category;
 
 import java.util.Locale;
 import java.util.Map;

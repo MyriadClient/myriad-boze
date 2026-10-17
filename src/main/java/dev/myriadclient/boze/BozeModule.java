@@ -1,10 +1,10 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.client.module.BaseModule;
 import dev.boze.api.utility.input.Bind;
-import dev.myriad.api.module.Category;
-import dev.myriad.api.module.Module;
-import dev.myriad.api.util.Keybind;
+import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.module.Module;
+import dev.myriadclient.api.util.Keybind;
 
 /**
  * A Myriad module standing in for one Boze module. Toggling it toggles the Boze module; its settings are the Boze

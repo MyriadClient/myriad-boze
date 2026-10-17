@@ -1,4 +1,4 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import java.util.Collection;
 import java.util.Set;

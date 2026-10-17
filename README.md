@@ -5,14 +5,14 @@ appears as a Myriad module: the same toggle, its settings as Myriad settings, it
 on the module card, searchable from the launcher, with Myriad's windows, workspaces and themes. Boze keeps working as
 before: this addon is a second front end for it, not a replacement.
 
-Needs [Myriad](https://myriadclient.dev/) ([source](https://github.com/fyzz-dev/myriad)) (0.2.0 or later: it relies on `Module.isMirror()` and on
-registries that stay open after startup), Myriad Boze and Boze (through its loader) in `mods/`. Boze's addon API has
+Needs [Myriad](https://myriadclient.dev/) ([source](https://github.com/MyriadClient/myriad-core)) (0.3.0 or later: earlier versions used the old `dev.myriad`
+packages), Myriad Boze and Boze (through its loader) in `mods/`. Boze's addon API has
 to be present, which it is whenever Boze itself runs; without Boze the addon loads, notes that there's nothing to
 bridge, and does nothing.
 
 ## Building
 
-Myriad comes from its maven (`https://fyzz-dev.github.io/myriad`), so a checkout builds on its own:
+Myriad comes from its maven (`https://maven.myriadclient.dev/releases`), so a checkout builds on its own:
 
 ```bash
 ./gradlew build                 # build/libs/myriad-boze-<v>.jar

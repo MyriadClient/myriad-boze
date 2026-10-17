@@ -1,4 +1,4 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.addon.AddonModule;
 import dev.boze.api.client.module.BaseModule;
@@ -12,16 +12,16 @@ import dev.boze.api.option.SliderOption;
 import dev.boze.api.option.ToggleOption;
 import dev.boze.api.render.ClientColor;
 import dev.boze.api.render.ColorMaker;
-import dev.myriad.api.setting.BoolSetting;
-import dev.myriad.api.setting.ColorSetting;
-import dev.myriad.api.setting.DoubleSetting;
-import dev.myriad.api.setting.EnumSetting;
-import dev.myriad.api.setting.KeybindSetting;
-import dev.myriad.api.setting.SettingColor;
-import dev.myriad.api.setting.SettingGroup;
-import dev.myriad.api.setting.Settings;
-import dev.myriad.api.util.ColorUtil;
-import dev.myriad.api.util.Keybind;
+import dev.myriadclient.api.setting.BoolSetting;
+import dev.myriadclient.api.setting.ColorSetting;
+import dev.myriadclient.api.setting.DoubleSetting;
+import dev.myriadclient.api.setting.EnumSetting;
+import dev.myriadclient.api.setting.KeybindSetting;
+import dev.myriadclient.api.setting.SettingColor;
+import dev.myriadclient.api.setting.SettingGroup;
+import dev.myriadclient.api.setting.Settings;
+import dev.myriadclient.api.util.ColorUtil;
+import dev.myriadclient.api.util.Keybind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import org.junit.jupiter.api.Test;
 

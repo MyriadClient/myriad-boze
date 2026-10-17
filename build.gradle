@@ -11,10 +11,13 @@ base {
 
 repositories {
 	// Myriad's releases. To build against unreleased Myriad changes, run `./gradlew publishToMavenLocal` there and add
-	// mavenLocal() here.
-	maven {
-		name = "Myriad"
-		url = "https://fyzz-dev.github.io/myriad"
+	// mavenLocal() to forRepositories.
+	exclusiveContent {
+		forRepositories(maven {
+			name = "Myriad"
+			url = "https://maven.myriadclient.dev/releases"
+		})
+		filter { includeGroup "dev.myriadclient" }
 	}
 	// Boze publishes its addon API (and the Orbit event bus it uses) here.
 	maven {
@@ -33,7 +36,7 @@ dependencies {
 	if (project.hasProperty("coreDir")) {
 		implementation fileTree(dir: "${project.coreDir}/core/build/libs", include: "myriad-*.jar", exclude: ["*-sources.jar", "*-javadoc.jar"])
 	} else {
-		implementation "dev.myriad:myriad:${project.myriad_version}"
+		implementation "dev.myriadclient:myriad:${project.myriad_version}"
 	}
 	// Only for `./gradlew runClient`, to test next to the stock modules; the addon doesn't use its classes. Unreleased
 	// Essentials the same way as core: `./gradlew build` in its checkout, then `-PessentialsDir=../myriad-essentials`
@@ -44,8 +47,8 @@ dependencies {
 				.files.max { it.lastModified() }
 		})
 	} else {
-		localRuntime("dev.myriad:myriad-essentials:${project.essentials_version}") {
-			if (project.hasProperty("coreDir")) exclude group: "dev.myriad", module: "myriad"
+		localRuntime("dev.myriadclient:myriad-essentials:${project.essentials_version}") {
+			if (project.hasProperty("coreDir")) exclude group: "dev.myriadclient", module: "myriad"
 		}
 	}
 

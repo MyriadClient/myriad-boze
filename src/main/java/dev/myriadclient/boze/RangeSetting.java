@@ -1,8 +1,8 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dev.myriad.api.setting.Setting;
+import dev.myriadclient.api.setting.Setting;
 
 import java.util.function.Supplier;
 

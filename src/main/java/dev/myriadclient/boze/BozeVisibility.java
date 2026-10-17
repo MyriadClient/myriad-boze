@@ -1,4 +1,4 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.option.Option;
 

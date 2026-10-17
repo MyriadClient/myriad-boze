@@ -1,7 +1,7 @@
-package dev.myriad.boze;
+package dev.myriadclient.boze;
 
 import dev.boze.api.addon.AddonModule;
-import dev.myriad.api.module.Categories;
+import dev.myriadclient.api.module.Categories;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
