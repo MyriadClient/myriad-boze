@@ -2,7 +2,7 @@ package dev.myriadclient.boze;
 
 import dev.boze.api.client.module.BaseModule;
 import dev.boze.api.utility.input.Bind;
-import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.module.Tag;
 import dev.myriadclient.api.module.Module;
 import dev.myriadclient.api.util.Keybind;
 
@@ -21,8 +21,8 @@ final class BozeModule extends Module {
 	/** Set while copying Boze's values in, so the change listeners don't write them straight back. */
 	private boolean pulling;
 
-	BozeModule(BaseModule boze, Category category) {
-		super(category, displayName(boze.getName()), oneLine(boze.getDescription()));
+	BozeModule(BaseModule boze, Tag tag) {
+		super(tag, displayName(boze.getName()), oneLine(boze.getDescription()));
 		this.boze = boze;
 		pulling = true;
 		try {

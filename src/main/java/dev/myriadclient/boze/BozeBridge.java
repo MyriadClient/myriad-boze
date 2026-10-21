@@ -8,14 +8,16 @@ import dev.boze.api.client.module.BaseModule;
 import dev.boze.api.internal.Instances;
 import dev.myriadclient.api.Myriad;
 import dev.myriadclient.api.addon.AddonContext;
-import dev.myriadclient.api.module.Category;
-import dev.myriadclient.api.setting.SettingColor;
+import dev.myriadclient.api.module.ModuleGroup;
+import dev.myriadclient.api.module.Tag;
+import dev.myriadclient.api.module.Tags;
 import dev.myriadclient.api.util.MyriadId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -36,8 +38,8 @@ final class BozeBridge {
 	/** Boze module to its mirror; null for one that couldn't be bridged, so it isn't retried every second. */
 	private final Map<BaseModule, BozeModule> bridged = new IdentityHashMap<>();
 	private final List<BozeModule> mirrors = new ArrayList<>();
-	/** Categories registered for Boze addons' own category names. */
-	private final Map<String, Category> addonCategories = new HashMap<>();
+	/** A group for each of Boze's categories (as {@link BozeCategories} reads them), by name. */
+	private final Map<String, ModuleGroup> groups = new HashMap<>();
 	private final FriendSync friends = new FriendSync(
 		new FriendSync.Side(() -> Myriad.friends().all(), n -> Myriad.friends().add(n), n -> Myriad.friends().remove(n)),
 		new FriendSync.Side(FriendManager::getFriends, FriendManager::addFriend, FriendManager::delFriend));
@@ -46,6 +48,8 @@ final class BozeBridge {
 
 	BozeBridge(AddonContext ctx) {
 		this.ctx = ctx;
+		// The shared ones first, in Boze's order, so the windows come in that order whatever loads first.
+		for (Tag t : List.of(Tags.COMBAT, Tags.MOVEMENT, Tags.RENDER, Tags.PLAYER, Tags.WORLD, Tags.MISC, BozeAddon.fallbackTag())) group(t.name(), t.icon());
 		discover();
 		syncFriends();
 	}
@@ -85,7 +89,9 @@ final class BozeBridge {
 			if (bridged.containsKey(boze)) continue;
 			BozeModule mirror = null;
 			try {
-				mirror = ctx.registerModule(new BozeModule(boze, categoryOf(boze)));
+				String category = addonCategory(boze);
+				Tag tag = category == null ? BozeCategories.of(boze) : tagOf(category);
+				mirror = ctx.registerModule(group(category == null ? tag.name() : category, tag.icon()), new BozeModule(boze, tag));
 				added++;
 			} catch (RuntimeException e) {
 				ctx.logger().warn("Could not bridge Boze module {}: {}", boze.getName(), e.toString());
@@ -101,20 +107,25 @@ final class BozeBridge {
 		}
 	}
 
-	/**
-	 * A module of one of Boze's own addons goes in that addon's category if it declared one; anything else by the
-	 * heuristics in {@link BozeCategories}.
-	 */
-	private Category categoryOf(BaseModule boze) {
+	/** The group for Boze's category {@code name}: one window in the menu, as Boze has one in its GUI. */
+	private ModuleGroup group(String name, String icon) {
+		return groups.computeIfAbsent(name.toLowerCase(Locale.ROOT), n -> Myriad.groups().get(ctx.id(MyriadId.toPath(name)))
+			.orElseGet(() -> ctx.registerGroup(name, icon)));
+	}
+
+	/** The category a module of one of Boze's own addons is in, if that addon declared one; null for anything else. */
+	private static String addonCategory(BaseModule boze) {
 		for (Addon addon : BozeInstance.INSTANCE.getAddons()) {
 			if (!addon.modules.contains(boze)) continue;
 			String name = addon.getCategory();
-			if (name == null || name.isBlank()) break;
-			Category shared = BozeCategories.byName(name);
-			if (shared != null) return shared;
-			return addonCategories.computeIfAbsent(name, n -> Myriad.categories().get(ctx.id(MyriadId.toPath(n)))
-				.orElseGet(() -> ctx.registerCategory(n, "", SettingColor.role(SettingColor.Mode.CYAN))));
+			return name == null || name.isBlank() ? null : name;
 		}
-		return BozeCategories.of(boze);
+		return null;
+	}
+
+	/** The tag for a Boze addon's category: the shared one it names, or the Boze tag. */
+	private static Tag tagOf(String category) {
+		Tag shared = BozeCategories.byName(category);
+		return shared != null ? shared : BozeAddon.fallbackTag();
 	}
 }

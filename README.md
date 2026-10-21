@@ -22,10 +22,11 @@ Myriad comes from its maven (`https://maven.myriadclient.dev/releases`), so a ch
 
 ## What you get
 
-- **Windows per category.** Boze's modules land in the shared categories (*Combat · Boze*, *Movement · Boze*, …) next to
-  your other addons' windows, placed on the workspace that already has that category. Boze's API doesn't say which
-  of its GUI categories a module is in, so the category is guessed from the module's package and name; the rest go
-  in a *Boze* category. A module in the wrong window is a cosmetic miss: add its name to `BozeCategories.NAMES`.
+- **A window per Boze category.** Boze's modules land in windows named after Boze's own categories (*Combat*,
+  *Movement*, *Render*, *Player*, *World*, *Misc*, with Boze beside the name), placed together like any addon's, and
+  tagged the same for the launcher (`#combat`). Boze's API doesn't say which of its GUI categories a module is in, so
+  the category is guessed from the module's package and name; the rest go in a *Boze* window. A module in the wrong
+  window is a cosmetic miss: add its name to `BozeCategories.NAMES`.
 - **Settings, translated.** Boze pages and folders become setting groups ("Render", "Misc · Sounds"); sub-options of a
   toggle show only while it's on, and options that only apply in some modes show only in those modes, as in Boze's
   own GUI (Aura in Grim mode shows 78 of its 94 settings, Auto Mine 48 of 79). Toggles, sliders, two-handle range sliders, modes, binds and colours (with a
@@ -34,7 +35,7 @@ Myriad comes from its maven (`https://maven.myriadclient.dev/releases`), so a ch
   mode and *Show In List* are Boze's "only while holding" and "visible" flags.
 - **Two-way, live.** Toggle or edit in Boze's GUI, through its commands or by loading one of its profiles, and Myriad
   shows it within half a second. Edits in Myriad reach Boze at once.
-- **Modules from Boze's own addons** are bridged too, in the category their addon declared.
+- **Modules from Boze's own addons** are bridged too, in a window named after the category their addon declared.
 - **One friends list.** Myriad's and Boze's friends are kept the same: on first contact the two lists are merged,
   then a friend added or removed on either side (Myriad's Friends panel or `.friend`, Boze's GUI or command) is
   added or removed on the other within a second.
@@ -64,7 +65,7 @@ the other way.
 | `BozeModule.java` | one mirror: toggle, keybind, hold and list visibility both ways |
 | `OptionBindings.java` | Boze options to Myriad settings: groups, visibility, each type's binding |
 | `BozeVisibility.java` | when Boze's own GUI shows an option (its per-mode conditions), found on Boze's internal options |
-| `BozeCategories.java` | which category a Boze module goes in |
+| `BozeCategories.java` | which Boze category (and tag) a Boze module goes in |
 | `FriendSync.java` | the two friend lists reconciled by diffing against the last sync |
 | `RangeSetting.java` | a low/high setting for Boze's range sliders |
 

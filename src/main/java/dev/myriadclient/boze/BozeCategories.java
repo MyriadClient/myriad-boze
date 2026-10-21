@@ -1,8 +1,8 @@
 package dev.myriadclient.boze;
 
 import dev.boze.api.client.module.BaseModule;
-import dev.myriadclient.api.module.Categories;
-import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.module.Tag;
+import dev.myriadclient.api.module.Tags;
 
 import java.util.Locale;
 import java.util.Map;
@@ -17,116 +17,116 @@ final class BozeCategories {
 	private BozeCategories() {
 	}
 
-	/** Package segments that name a category, normalised, to shared categories. */
-	private static final Map<String, Category> PACKAGES = Map.ofEntries(
-		Map.entry("combat", Categories.COMBAT),
-		Map.entry("ghost", Categories.COMBAT),
-		Map.entry("movement", Categories.MOVEMENT),
-		Map.entry("travel", Categories.MOVEMENT),
-		Map.entry("render", Categories.RENDER),
-		Map.entry("visual", Categories.RENDER),
-		Map.entry("visuals", Categories.RENDER),
-		Map.entry("player", Categories.PLAYER),
-		Map.entry("world", Categories.WORLD),
-		Map.entry("misc", Categories.MISC),
-		Map.entry("miscellaneous", Categories.MISC),
-		Map.entry("chat", Categories.MISC)
+	/** Package segments that name a category, normalised, to shared tags. */
+	private static final Map<String, Tag> PACKAGES = Map.ofEntries(
+		Map.entry("combat", Tags.COMBAT),
+		Map.entry("ghost", Tags.COMBAT),
+		Map.entry("movement", Tags.MOVEMENT),
+		Map.entry("travel", Tags.MOVEMENT),
+		Map.entry("render", Tags.RENDER),
+		Map.entry("visual", Tags.RENDER),
+		Map.entry("visuals", Tags.RENDER),
+		Map.entry("player", Tags.PLAYER),
+		Map.entry("world", Tags.WORLD),
+		Map.entry("misc", Tags.MISC),
+		Map.entry("miscellaneous", Tags.MISC),
+		Map.entry("chat", Tags.MISC)
 	);
 
 	/**
-	 * Boze category names (an addon's {@code createCategory}) to shared categories. "Client" is one of Boze's GUI
+	 * Boze category names (an addon's {@code createTag}) to shared categories. "Client" is one of Boze's GUI
 	 * categories but also a package segment of everything Boze ({@code dev.boze.client...}), so it's only here.
 	 */
-	private static final Map<String, Category> CATEGORY_NAMES = Map.of("client", Categories.MISC);
+	private static final Map<String, Tag> CATEGORY_NAMES = Map.of("client", Tags.MISC);
 
-	/** Module names (normalised: lower case, no spaces) to shared categories. Boze's naming follows the usual client vocabulary. */
-	private static final Map<String, Category> NAMES = Map.ofEntries(
+	/** Module names (normalised: lower case, no spaces) to shared tags. Boze's naming follows the usual client vocabulary. */
+	private static final Map<String, Tag> NAMES = Map.ofEntries(
 		// Combat
-		entry("autocrystal", Categories.COMBAT), entry("autoanchor", Categories.COMBAT), entry("anchoraura", Categories.COMBAT),
-		entry("aura", Categories.COMBAT), entry("killaura", Categories.COMBAT), entry("trigger", Categories.COMBAT),
-		entry("triggerbot", Categories.COMBAT), entry("aimassist", Categories.COMBAT), entry("surround", Categories.COMBAT),
-		entry("holefill", Categories.COMBAT), entry("selftrap", Categories.COMBAT), entry("autotrap", Categories.COMBAT),
-		entry("burrow", Categories.COMBAT), entry("autoweb", Categories.COMBAT), entry("autototem", Categories.COMBAT),
-		entry("offhand", Categories.COMBAT), entry("automine", Categories.COMBAT), entry("packetmine", Categories.COMBAT),
-		entry("pearlphase", Categories.COMBAT), entry("autopearl", Categories.COMBAT), entry("autobed", Categories.COMBAT),
-		entry("bedaura", Categories.COMBAT), entry("cevbreaker", Categories.COMBAT), entry("pistonaura", Categories.COMBAT),
-		entry("pistoncrystal", Categories.COMBAT), entry("autoarmor", Categories.COMBAT), entry("antiregear", Categories.COMBAT),
-		entry("quiver", Categories.COMBAT), entry("bowaimbot", Categories.COMBAT), entry("criticals", Categories.COMBAT),
-		entry("autohitcrystal", Categories.COMBAT), entry("holesnap", Categories.COMBAT), entry("obsidian", Categories.COMBAT),
-		entry("autocity", Categories.COMBAT), entry("cityesp", Categories.RENDER), entry("fastbow", Categories.COMBAT),
-		entry("autoexp", Categories.COMBAT), entry("mace", Categories.COMBAT), entry("maceaura", Categories.COMBAT),
-		entry("autoeat", Categories.PLAYER),
+		entry("autocrystal", Tags.COMBAT), entry("autoanchor", Tags.COMBAT), entry("anchoraura", Tags.COMBAT),
+		entry("aura", Tags.COMBAT), entry("killaura", Tags.COMBAT), entry("trigger", Tags.COMBAT),
+		entry("triggerbot", Tags.COMBAT), entry("aimassist", Tags.COMBAT), entry("surround", Tags.COMBAT),
+		entry("holefill", Tags.COMBAT), entry("selftrap", Tags.COMBAT), entry("autotrap", Tags.COMBAT),
+		entry("burrow", Tags.COMBAT), entry("autoweb", Tags.COMBAT), entry("autototem", Tags.COMBAT),
+		entry("offhand", Tags.COMBAT), entry("automine", Tags.COMBAT), entry("packetmine", Tags.COMBAT),
+		entry("pearlphase", Tags.COMBAT), entry("autopearl", Tags.COMBAT), entry("autobed", Tags.COMBAT),
+		entry("bedaura", Tags.COMBAT), entry("cevbreaker", Tags.COMBAT), entry("pistonaura", Tags.COMBAT),
+		entry("pistoncrystal", Tags.COMBAT), entry("autoarmor", Tags.COMBAT), entry("antiregear", Tags.COMBAT),
+		entry("quiver", Tags.COMBAT), entry("bowaimbot", Tags.COMBAT), entry("criticals", Tags.COMBAT),
+		entry("autohitcrystal", Tags.COMBAT), entry("holesnap", Tags.COMBAT), entry("obsidian", Tags.COMBAT),
+		entry("autocity", Tags.COMBAT), entry("cityesp", Tags.RENDER), entry("fastbow", Tags.COMBAT),
+		entry("autoexp", Tags.COMBAT), entry("mace", Tags.COMBAT), entry("maceaura", Tags.COMBAT),
+		entry("autoeat", Tags.PLAYER),
 		// Movement
-		entry("elytrafly", Categories.MOVEMENT), entry("elytraflight", Categories.MOVEMENT), entry("autopilot", Categories.MOVEMENT),
-		entry("elytraautopilot", Categories.MOVEMENT), entry("speed", Categories.MOVEMENT), entry("sprint", Categories.MOVEMENT),
-		entry("step", Categories.MOVEMENT), entry("nofall", Categories.MOVEMENT), entry("velocity", Categories.MOVEMENT),
-		entry("noslow", Categories.MOVEMENT), entry("fly", Categories.MOVEMENT), entry("flight", Categories.MOVEMENT),
-		entry("jesus", Categories.MOVEMENT), entry("strafe", Categories.MOVEMENT), entry("autowalk", Categories.MOVEMENT),
-		entry("reversestep", Categories.MOVEMENT), entry("boatfly", Categories.MOVEMENT), entry("entitycontrol", Categories.MOVEMENT),
-		entry("antihunger", Categories.MOVEMENT), entry("safewalk", Categories.MOVEMENT), entry("parkour", Categories.MOVEMENT),
-		entry("spider", Categories.MOVEMENT), entry("longjump", Categories.MOVEMENT), entry("timer", Categories.MOVEMENT),
-		entry("elytrarecast", Categories.MOVEMENT), entry("packetfly", Categories.MOVEMENT), entry("pearlrecall", Categories.MOVEMENT),
-		entry("inventorymove", Categories.MOVEMENT), entry("inventorywalk", Categories.MOVEMENT),
+		entry("elytrafly", Tags.MOVEMENT), entry("elytraflight", Tags.MOVEMENT), entry("autopilot", Tags.MOVEMENT),
+		entry("elytraautopilot", Tags.MOVEMENT), entry("speed", Tags.MOVEMENT), entry("sprint", Tags.MOVEMENT),
+		entry("step", Tags.MOVEMENT), entry("nofall", Tags.MOVEMENT), entry("velocity", Tags.MOVEMENT),
+		entry("noslow", Tags.MOVEMENT), entry("fly", Tags.MOVEMENT), entry("flight", Tags.MOVEMENT),
+		entry("jesus", Tags.MOVEMENT), entry("strafe", Tags.MOVEMENT), entry("autowalk", Tags.MOVEMENT),
+		entry("reversestep", Tags.MOVEMENT), entry("boatfly", Tags.MOVEMENT), entry("entitycontrol", Tags.MOVEMENT),
+		entry("antihunger", Tags.MOVEMENT), entry("safewalk", Tags.MOVEMENT), entry("parkour", Tags.MOVEMENT),
+		entry("spider", Tags.MOVEMENT), entry("longjump", Tags.MOVEMENT), entry("timer", Tags.MOVEMENT),
+		entry("elytrarecast", Tags.MOVEMENT), entry("packetfly", Tags.MOVEMENT), entry("pearlrecall", Tags.MOVEMENT),
+		entry("inventorymove", Tags.MOVEMENT), entry("inventorywalk", Tags.MOVEMENT),
 		// Player
-		entry("fastuse", Categories.PLAYER), entry("fastplace", Categories.PLAYER), entry("fastbreak", Categories.PLAYER),
-		entry("autotool", Categories.PLAYER), entry("autoreplenish", Categories.PLAYER), entry("stackreplenish", Categories.PLAYER),
-		entry("reach", Categories.PLAYER), entry("xcarry", Categories.PLAYER), entry("antiaim", Categories.PLAYER),
-		entry("autorespawn", Categories.PLAYER), entry("autolog", Categories.PLAYER), entry("autodisconnect", Categories.PLAYER),
-		entry("middleclick", Categories.PLAYER), entry("nointeract", Categories.PLAYER), entry("portals", Categories.PLAYER),
-		entry("armorupgrader", Categories.PLAYER), entry("autoupgrade", Categories.PLAYER), entry("autosmith", Categories.PLAYER),
-		entry("autofish", Categories.PLAYER), entry("autoshulker", Categories.PLAYER), entry("autoremount", Categories.PLAYER),
-		entry("invmanager", Categories.PLAYER), entry("inventorymanager", Categories.PLAYER), entry("autosign", Categories.PLAYER),
-		entry("antiafk", Categories.PLAYER), entry("blink", Categories.PLAYER), entry("ghosthand", Categories.PLAYER),
-		entry("multitask", Categories.PLAYER), entry("nopush", Categories.PLAYER), entry("wallinteract", Categories.PLAYER),
+		entry("fastuse", Tags.PLAYER), entry("fastplace", Tags.PLAYER), entry("fastbreak", Tags.PLAYER),
+		entry("autotool", Tags.PLAYER), entry("autoreplenish", Tags.PLAYER), entry("stackreplenish", Tags.PLAYER),
+		entry("reach", Tags.PLAYER), entry("xcarry", Tags.PLAYER), entry("antiaim", Tags.PLAYER),
+		entry("autorespawn", Tags.PLAYER), entry("autolog", Tags.PLAYER), entry("autodisconnect", Tags.PLAYER),
+		entry("middleclick", Tags.PLAYER), entry("nointeract", Tags.PLAYER), entry("portals", Tags.PLAYER),
+		entry("armorupgrader", Tags.PLAYER), entry("autoupgrade", Tags.PLAYER), entry("autosmith", Tags.PLAYER),
+		entry("autofish", Tags.PLAYER), entry("autoshulker", Tags.PLAYER), entry("autoremount", Tags.PLAYER),
+		entry("invmanager", Tags.PLAYER), entry("inventorymanager", Tags.PLAYER), entry("autosign", Tags.PLAYER),
+		entry("antiafk", Tags.PLAYER), entry("blink", Tags.PLAYER), entry("ghosthand", Tags.PLAYER),
+		entry("multitask", Tags.PLAYER), entry("nopush", Tags.PLAYER), entry("wallinteract", Tags.PLAYER),
 		// Render
-		entry("esp", Categories.RENDER), entry("tracers", Categories.RENDER), entry("nametags", Categories.RENDER),
-		entry("fullbright", Categories.RENDER), entry("freecam", Categories.RENDER), entry("freelook", Categories.RENDER),
-		entry("norender", Categories.RENDER), entry("xray", Categories.RENDER), entry("chams", Categories.RENDER),
-		entry("holeesp", Categories.RENDER), entry("blockesp", Categories.RENDER), entry("storageesp", Categories.RENDER),
-		entry("voidesp", Categories.RENDER), entry("burrowesp", Categories.RENDER), entry("shaders", Categories.RENDER),
-		entry("viewmodel", Categories.RENDER), entry("zoom", Categories.RENDER), entry("crosshair", Categories.RENDER),
-		entry("breakesp", Categories.RENDER), entry("blockhighlight", Categories.RENDER), entry("skybox", Categories.RENDER),
-		entry("logoutspots", Categories.RENDER), entry("trajectories", Categories.RENDER), entry("itemesp", Categories.RENDER),
-		entry("pearlesp", Categories.RENDER), entry("cameraclip", Categories.RENDER), entry("noweather", Categories.RENDER),
-		entry("ambience", Categories.RENDER), entry("capes", Categories.RENDER), entry("tooltips", Categories.RENDER),
-		entry("betterchat", Categories.MISC), entry("crystalchams", Categories.RENDER), entry("hitparticles", Categories.RENDER),
-		entry("popchams", Categories.RENDER), entry("totempops", Categories.RENDER),
+		entry("esp", Tags.RENDER), entry("tracers", Tags.RENDER), entry("nametags", Tags.RENDER),
+		entry("fullbright", Tags.RENDER), entry("freecam", Tags.RENDER), entry("freelook", Tags.RENDER),
+		entry("norender", Tags.RENDER), entry("xray", Tags.RENDER), entry("chams", Tags.RENDER),
+		entry("holeesp", Tags.RENDER), entry("blockesp", Tags.RENDER), entry("storageesp", Tags.RENDER),
+		entry("voidesp", Tags.RENDER), entry("burrowesp", Tags.RENDER), entry("shaders", Tags.RENDER),
+		entry("viewmodel", Tags.RENDER), entry("zoom", Tags.RENDER), entry("crosshair", Tags.RENDER),
+		entry("breakesp", Tags.RENDER), entry("blockhighlight", Tags.RENDER), entry("skybox", Tags.RENDER),
+		entry("logoutspots", Tags.RENDER), entry("trajectories", Tags.RENDER), entry("itemesp", Tags.RENDER),
+		entry("pearlesp", Tags.RENDER), entry("cameraclip", Tags.RENDER), entry("noweather", Tags.RENDER),
+		entry("ambience", Tags.RENDER), entry("capes", Tags.RENDER), entry("tooltips", Tags.RENDER),
+		entry("betterchat", Tags.MISC), entry("crystalchams", Tags.RENDER), entry("hitparticles", Tags.RENDER),
+		entry("popchams", Tags.RENDER), entry("totempops", Tags.RENDER),
 		// World
-		entry("scaffold", Categories.WORLD), entry("airplace", Categories.WORLD), entry("nuker", Categories.WORLD),
-		entry("autobuild", Categories.WORLD), entry("baritone", Categories.WORLD), entry("printer", Categories.WORLD),
-		entry("highwaybuilder", Categories.WORLD), entry("tunneler", Categories.WORLD), entry("avoid", Categories.WORLD),
-		entry("autoreplace", Categories.WORLD), entry("packetplace", Categories.WORLD), entry("liquidfiller", Categories.WORLD),
+		entry("scaffold", Tags.WORLD), entry("airplace", Tags.WORLD), entry("nuker", Tags.WORLD),
+		entry("autobuild", Tags.WORLD), entry("baritone", Tags.WORLD), entry("printer", Tags.WORLD),
+		entry("highwaybuilder", Tags.WORLD), entry("tunneler", Tags.WORLD), entry("avoid", Tags.WORLD),
+		entry("autoreplace", Tags.WORLD), entry("packetplace", Tags.WORLD), entry("liquidfiller", Tags.WORLD),
 		// Misc
-		entry("antikick", Categories.MISC), entry("discordrpc", Categories.MISC), entry("notifier", Categories.MISC),
-		entry("notifications", Categories.MISC), entry("spammer", Categories.MISC), entry("autoreconnect", Categories.MISC),
-		entry("friends", Categories.MISC), entry("betterportals", Categories.MISC), entry("packetlogger", Categories.MISC),
-		entry("visualrange", Categories.MISC), entry("autoreply", Categories.MISC), entry("chatmanager", Categories.MISC),
-		entry("fakeplayer", Categories.MISC), entry("antispam", Categories.MISC), entry("announcer", Categories.MISC)
+		entry("antikick", Tags.MISC), entry("discordrpc", Tags.MISC), entry("notifier", Tags.MISC),
+		entry("notifications", Tags.MISC), entry("spammer", Tags.MISC), entry("autoreconnect", Tags.MISC),
+		entry("friends", Tags.MISC), entry("betterportals", Tags.MISC), entry("packetlogger", Tags.MISC),
+		entry("visualrange", Tags.MISC), entry("autoreply", Tags.MISC), entry("chatmanager", Tags.MISC),
+		entry("fakeplayer", Tags.MISC), entry("antispam", Tags.MISC), entry("announcer", Tags.MISC)
 	);
 
-	private static Map.Entry<String, Category> entry(String name, Category category) {
-		return Map.entry(name, category);
+	private static Map.Entry<String, Tag> entry(String name, Tag tag) {
+		return Map.entry(name, tag);
 	}
 
-	static Category of(BaseModule module) {
-		Category fromPackage = fromPackage(module.getClass().getName());
+	static Tag of(BaseModule module) {
+		Tag fromPackage = fromPackage(module.getClass().getName());
 		if (fromPackage != null) return fromPackage;
-		Category fromName = NAMES.get(normalize(module.getName()));
-		return fromName != null ? fromName : BozeAddon.fallbackCategory();
+		Tag fromName = NAMES.get(normalize(module.getName()));
+		return fromName != null ? fromName : BozeAddon.fallbackTag();
 	}
 
-	/** The shared category a Boze category name stands for, or null for one of Boze's own ("Addons", "Hud"). */
-	static Category byName(String name) {
+	/** The shared tag a Boze category name stands for, or null for one of Boze's own ("Addons", "Hud"). */
+	static Tag byName(String name) {
 		String n = normalize(name);
-		Category c = PACKAGES.get(n);
+		Tag c = PACKAGES.get(n);
 		return c != null ? c : CATEGORY_NAMES.get(n);
 	}
 
-	/** The category named by the innermost package segment that names one, if any. */
-	static Category fromPackage(String className) {
+	/** The tag named by the innermost package segment that names one, if any. */
+	static Tag fromPackage(String className) {
 		String[] parts = className.toLowerCase(Locale.ROOT).split("\\.");
 		for (int i = parts.length - 2; i >= 0; i--) {
-			Category c = PACKAGES.get(parts[i]);
+			Tag c = PACKAGES.get(parts[i]);
 			if (c != null) return c;
 		}
 		return null;

@@ -3,7 +3,7 @@ package dev.myriadclient.boze;
 import dev.myriadclient.api.addon.AddonContext;
 import dev.myriadclient.api.addon.MyriadAddon;
 import dev.myriadclient.api.event.events.TickEvent;
-import dev.myriadclient.api.module.Category;
+import dev.myriadclient.api.module.Tag;
 import dev.myriadclient.api.setting.SettingColor;
 import dev.myriadclient.api.ui.widget.HBox;
 import dev.myriadclient.api.ui.widget.Slider;
@@ -24,20 +24,20 @@ public final class BozeAddon implements MyriadAddon {
 	/** How long to wait for Boze before saying so, in ticks (a minute). */
 	private static final int PATIENCE = 20 * 60;
 
-	private static Category fallback;
+	private static Tag fallback;
 
 	private AddonContext ctx;
 	private BozeBridge bridge;
 	private int waited;
 
-	/** The category for Boze modules that fit none of the shared ones. */
-	static Category fallbackCategory() {
+	/** The tag (and group) for Boze modules that fit none of the shared tags. */
+	static Tag fallbackTag() {
 		return fallback;
 	}
 
 	@Override
-	public void registerCategories(AddonContext ctx) {
-		fallback = ctx.registerCategory("Boze", "", SettingColor.role(SettingColor.Mode.SECONDARY));
+	public void registerTags(AddonContext ctx) {
+		fallback = ctx.registerTag("Boze", "", SettingColor.role(SettingColor.Mode.SECONDARY));
 	}
 
 	@Override

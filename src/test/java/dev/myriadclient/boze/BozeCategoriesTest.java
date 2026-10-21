@@ -1,7 +1,7 @@
 package dev.myriadclient.boze;
 
 import dev.boze.api.addon.AddonModule;
-import dev.myriadclient.api.module.Categories;
+import dev.myriadclient.api.module.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,16 +15,16 @@ class BozeCategoriesTest {
 	}
 
 	@Test
-	void knownNamesLandInSharedCategories() {
-		assertEquals(Categories.COMBAT, BozeCategories.of(new Named("AutoCrystal")));
-		assertEquals(Categories.MOVEMENT, BozeCategories.of(new Named("ElytraFly")));
-		assertEquals(Categories.RENDER, BozeCategories.of(new Named("Hole ESP")));
-		assertEquals(Categories.PLAYER, BozeCategories.of(new Named("auto_tool")));
+	void knownNamesLandInSharedTags() {
+		assertEquals(Tags.COMBAT, BozeCategories.of(new Named("AutoCrystal")));
+		assertEquals(Tags.MOVEMENT, BozeCategories.of(new Named("ElytraFly")));
+		assertEquals(Tags.RENDER, BozeCategories.of(new Named("Hole ESP")));
+		assertEquals(Tags.PLAYER, BozeCategories.of(new Named("auto_tool")));
 	}
 
 	@Test
 	void unknownNamesFallBack() {
-		// The fallback category is registered by the addon at startup; here nothing is, so null stands for it.
+		// The fallback tag is registered by the addon at startup; here nothing is, so null stands for it.
 		assertNull(BozeCategories.of(new Named("SomethingNew")));
 	}
 }
