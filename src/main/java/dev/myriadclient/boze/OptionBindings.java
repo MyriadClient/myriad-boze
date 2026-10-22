@@ -120,7 +120,7 @@ final class OptionBindings {
 			}
 			case SliderOption sl -> {
 				int decimals = decimalsOf(sl.step);
-				DoubleSetting s = group.doubleSetting(name).description(desc).defaultValue(sl.getValue()).range(sl.min, sl.max).decimals(decimals)
+				DoubleSetting s = group.decimal(name).description(desc).defaultValue(sl.getValue()).range(sl.min, sl.max).decimals(decimals)
 					.visible(visible).onChanged(v -> push(() -> sl.setValue(v))).build();
 				bindings.add(() -> s.set(sl.getValue()));
 			}
@@ -149,7 +149,7 @@ final class OptionBindings {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private <E extends Enum<E>> void bindMode(SettingGroup group, String name, String desc, Supplier<Boolean> visible, ModeOption<?> raw) {
 		ModeOption<E> m = (ModeOption<E>) raw;
-		EnumSetting<E> s = group.enumSetting(name, m.getValue()).description(desc).visible(visible).onChanged(v -> push(() -> m.setValue(v))).build();
+		EnumSetting<E> s = group.oneOf(name, m.getValue()).description(desc).visible(visible).onChanged(v -> push(() -> m.setValue(v))).build();
 		bindings.add(() -> s.set(m.getValue()));
 	}
 
@@ -157,7 +157,7 @@ final class OptionBindings {
 		ColorOption.Value start = c.getValue();
 		ColorSetting color = group.color(name).description(desc).defaultValue(argb(start)).visible(visible).build();
 		DoubleSetting outline = c.isSingleOpacity() ? null
-			: group.doubleSetting(name + " Outline").description("Outline opacity of " + name + ".").defaultValue(start.outlineOpacity).range(0, 1).decimals(2).visible(visible).build();
+			: group.decimal(name + " Outline").description("Outline opacity of " + name + ".").defaultValue(start.outlineOpacity).range(0, 1).decimals(2).visible(visible).build();
 		var last = new Object() {
 			ColorOption.Value value = start;
 			float fill = start.fillOpacity, outlineOpacity = start.outlineOpacity;
