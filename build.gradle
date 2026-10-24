@@ -2,7 +2,7 @@
 // release was built with, the dev client and its switches (with Essentials), checkApiOnly, the LICENSE in the jar and
 // publishing. `-PcoreDir=../myriad` builds against a core checkout next to this one. What's below is Boze's own.
 plugins {
-	id 'dev.myriadclient.addon' version '1.0.0'
+	id 'dev.myriadclient.addon' version '1.1.0'
 }
 
 version = project.mod_version
