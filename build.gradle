@@ -1,5 +1,8 @@
+// The Myriad addon plugin sets up what every addon has: Loom, Minecraft, Fabric and Myriad at the versions that Myriad
+// release was built with, the dev client and its switches (with Essentials), checkApiOnly, the LICENSE in the jar and
+// publishing. `-PcoreDir=../myriad` builds against a core checkout next to this one. What's below is Boze's own.
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'dev.myriadclient.addon' version '1.0.0'
 }
 
 version = project.mod_version
@@ -10,15 +13,6 @@ base {
 }
 
 repositories {
-	// Myriad's releases. To build against unreleased Myriad changes, run `./gradlew publishToMavenLocal` there and add
-	// mavenLocal() to forRepositories.
-	exclusiveContent {
-		forRepositories(maven {
-			name = "Myriad"
-			url = "https://maven.myriadclient.dev/releases"
-		})
-		filter { includeGroup "dev.myriadclient" }
-	}
 	// Boze publishes its addon API (and the Orbit event bus it uses) here.
 	maven {
 		name = "Boze"
@@ -27,31 +21,6 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-
-	// The released core by default. While changing core and this addon together, build core's jar in a checkout next to
-	// this one (`./gradlew :core:jar` there) and point here at it: `./gradlew runClient -PcoreDir=../myriad`.
-	if (project.hasProperty("coreDir")) {
-		implementation fileTree(dir: "${project.coreDir}/core/build/libs", include: "myriad-*.jar", exclude: ["*-sources.jar", "*-javadoc.jar"])
-	} else {
-		implementation "dev.myriadclient:myriad:${project.myriad_version}"
-	}
-	// Only for `./gradlew runClient`, to test next to the stock modules; the addon doesn't use its classes. Unreleased
-	// Essentials the same way as core: `./gradlew build` in its checkout, then `-PessentialsDir=../myriad-essentials`
-	// (its newest jar is used).
-	if (project.hasProperty("essentialsDir")) {
-		localRuntime files({
-			fileTree(dir: "${project.essentialsDir}/build/libs", include: "myriad-essentials-*.jar", exclude: "*-sources.jar")
-				.files.max { it.lastModified() }
-		})
-	} else {
-		localRuntime("dev.myriadclient:myriad-essentials:${project.essentials_version}") {
-			if (project.hasProperty("coreDir")) exclude group: "dev.myriadclient", module: "myriad"
-		}
-	}
-
 	// Boze's public addon API: compiled against only. At runtime Boze itself provides these classes; without Boze the
 	// addon notices and bridges nothing.
 	compileOnly "dev.boze:boze-api:${project.boze_api_version}+${project.minecraft_version}"
@@ -65,49 +34,8 @@ dependencies {
 }
 
 test {
-	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
 		exceptionFormat = "full"
-	}
-}
-
-loom {
-	runs {
-		client {
-			// ./gradlew runClient -PopenDesktop opens the Myriad menu over the title screen on launch.
-			property("myriad.openDesktop", project.hasProperty("openDesktop").toString())
-			if (project.hasProperty("screenshotEvery")) property("myriad.screenshotEvery", project.property("screenshotEvery").toString())
-			property("myriad.auditMixins", project.hasProperty("auditMixins").toString())
-			// Lines appended to run/myriad-dev-inbox are run in game (Myriad commands, the menu, screenshots), so a
-			// script can drive the client; Essentials' tools/grim-test/client writes there.
-			property("myriad.devConsole", "myriad-dev-inbox")
-			if (project.hasProperty("quickPlay")) programArgs("--quickPlaySingleplayer", project.property("quickPlay").toString())
-		}
-	}
-}
-
-processResources {
-	def props = [version: project.version, myriad_version: project.myriad_version, minecraft_version: project.minecraft_version]
-	inputs.properties props
-	filesMatching("fabric.mod.json") {
-		expand props
-	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
-	it.options.encoding = "UTF-8"
-}
-
-java {
-	withSourcesJar()
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.base.archivesName.get()}" }
 	}
 }
